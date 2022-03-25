@@ -1,10 +1,12 @@
 pipeline {
   agent any
   stages {
-    stage('Create JAR') {
+    stage('SonarQube') {
       steps {
-        sh '''mvn package
-java -jar target/spring-petclinic-2.1.0.jar'''
+        withSonarQubeEnv(installationName: 'SonarQube', credentialsId: 'SonarQube token') {
+          sh 'mvn clean package sonar:sonar'
+        }
+
       }
     }
 
