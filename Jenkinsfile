@@ -1,18 +1,15 @@
 pipeline {
   agent any
   stages {
-    stage('SonarQube') {
+    stage('Build') {
       steps {
-        withSonarQubeEnv(installationName: 'SonarQube', credentialsId: 'SonarQube token') {
-          sh 'mvn clean package sonar:sonar'
-        }
-
+        sh 'echo "Start build"'
       }
     }
 
-    stage('Analysis') {
+    stage('SonarQube') {
       steps {
-        waitForQualityGate(abortPipeline: true, credentialsId: 'SonarQube token')
+        withSonarQubeEnv(installationName: 'SonarQube', credentialsId: 'SonarQube token', envOnly: true)
       }
     }
 
