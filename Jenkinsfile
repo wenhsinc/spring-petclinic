@@ -10,5 +10,11 @@ pipeline {
       }
     }
 
+    stage('Analysis') {
+      steps {
+        waitForQualityGate(abortPipeline: true, credentialsId: 'SonarQube token')
+      }
+    }
+
   }
 }
