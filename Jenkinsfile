@@ -3,7 +3,10 @@ pipeline {
   stages {
     stage('Scan with SonarQube') {
       steps {
-        withSonarQubeEnv(installationName: 'SonarQube', credentialsId: 'SonarQube token')
+        withSonarQubeEnv(installationName: 'SonarQube', credentialsId: 'SonarQube token') {
+          sh 'sh \'mvn clean package sonar:sonar\''
+        }
+
       }
     }
 
