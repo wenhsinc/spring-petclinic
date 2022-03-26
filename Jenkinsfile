@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Static analysis and Build') {
+    stage('SonarQube Static analysis') {
       steps {
         echo 'Initiating maven build'
         withSonarQubeEnv(installationName: 'SonarQube', credentialsId: 'SonarQube Secret') {
@@ -11,7 +11,7 @@ pipeline {
       }
     }
 
-    stage('Run jar') {
+    stage('Package jar') {
       steps {
         timeout(time: 7, unit: 'MINUTES') {
           sh '''./mvnw package
