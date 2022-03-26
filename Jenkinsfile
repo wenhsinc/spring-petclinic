@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Initiating maven build'
-        withSonarQubeEnv(installationName: 'SonarQube Scanner', credentialsId: 'SonarQube token') {
+        withSonarQubeEnv(installationName: 'SonarQube', credentialsId: 'SonarQube token') {
           sh 'mvn clean package sonar:sonar'
         }
 
