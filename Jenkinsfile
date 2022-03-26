@@ -22,11 +22,5 @@ pipeline {
       }
     }
 
-    stage('End') {
-      steps {
-        sh 'echo \'Success!\''
-      }
-    }
-
   }
 }
