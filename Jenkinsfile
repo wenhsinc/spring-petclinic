@@ -13,8 +13,11 @@ pipeline {
 
     stage('Run jar') {
       steps {
-        sh '''./mvnw package
+        timeout(time: 7, unit: 'MINUTES') {
+          sh '''./mvnw package
 java -jar -Dserver.port=7000 target/*.jar'''
+        }
+
       }
     }
 
