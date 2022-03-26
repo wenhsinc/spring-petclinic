@@ -1,16 +1,22 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
+    stage('build && SonarQube analysis') {
       steps {
-        sh 'echo "Start build"'
+        withSonarQubeEnv('SonarQube') {
+          withMaven(maven: 'Maven 3.6.3') {
+            sh 'mvn clean package sonar:sonar'
+          }
+
+        }
+
       }
     }
 
-    stage('SonarQube') {
+    stage('Quality Gate') {
       steps {
-        withSonarQubeEnv(installationName: 'SonarQube', credentialsId: 'SonarQube token', envOnly: true) {
-          sh 'mvn clean package sonar:sonar'
+        timeout(time: 1, unit: 'HOURS') {
+          waitForQualityGate true
         }
 
       }
