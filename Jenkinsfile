@@ -1,24 +1,15 @@
 pipeline {
   agent any
   stages {
-    stage('build && SonarQube analysis') {
+    stage('Build and analysis') {
       steps {
-        withSonarQubeEnv(installationName: 'SonarQube', credentialsId: 'SonarQube token') {
-          withMaven(maven: 'Maven 3.6.3') {
-            sh 'mvn clean package sonar:sonar'
-          }
-
-        }
-
+        sh 'echo \'build and do static analysis\''
       }
     }
 
-    stage('Quality Gate') {
+    stage('Create jar') {
       steps {
-        timeout(time: 1, unit: 'HOURS') {
-          waitForQualityGate true
-        }
-
+        sh 'echo \'JAR created\''
       }
     }
 
