@@ -13,7 +13,15 @@ pipeline {
 
     stage('Run jar') {
       steps {
-        sh 'java -jar -Dserver.port=7000 target/*.jar'
+        sh '''cd spring-petclinic
+./mvnw package
+java -jar -Dserver.port=7000 target/*.jar'''
+      }
+    }
+
+    stage('End') {
+      steps {
+        sh 'echo \'Success!\''
       }
     }
 
