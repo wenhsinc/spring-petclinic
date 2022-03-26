@@ -11,9 +11,9 @@ pipeline {
       }
     }
 
-    stage('Create jar') {
+    stage('Run jar') {
       steps {
-        sh 'java -jar target/spring-petclinic-2.1.0.jar '
+        sh 'java -jar target/*.jar'
       }
     }
 
