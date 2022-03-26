@@ -1,15 +1,11 @@
 pipeline {
   agent any
   stages {
-    stage('Build and analysis') {
+    stage('Build') {
       steps {
-        sh 'echo \'build and do static analysis\''
-      }
-    }
-
-    stage('Create jar') {
-      steps {
-        sh 'echo \'JAR created\''
+        echo 'Initiating maven build'
+        sh 'mvn clean install -Dlicense.skip=true'
+        echo 'Maven build complete'
       }
     }
 
