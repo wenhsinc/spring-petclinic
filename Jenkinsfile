@@ -1,24 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('SonarQube Static analysis') {
+    stage('Run ansible playbook') {
       steps {
-        echo 'Initiating maven build'
-        withSonarQubeEnv(installationName: 'SonarQube', credentialsId: 'SonarQube Secret') {
-          sh 'mvn clean package sonar:sonar'
-        }
-
-      }
-    }
-
-    stage('Package jar') {
-      steps {
-        timeout(time: 7, unit: 'MINUTES') {
-          sh '''./mvnw package
-
-'''
-        }
-
+        ansiblePlaybook(playbook: 'playbook.yml', disableHostKeyChecking: true, inventory: 'dev.inv')
       }
     }
 
