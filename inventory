@@ -1,2 +1,1 @@
-[server]
-10.211.55.16 ansible_port=22 ansible_user=vagrant
+10.211.55.16
