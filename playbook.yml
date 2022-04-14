@@ -14,7 +14,7 @@
     # task 3
     - name: copy JAR file
       copy: 
-        src: ~/petclinic/spring-petclinic/target/spring-petclinic-2.6.0-SNAPSHOT.jar
+        src: /target/spring-petclinic-2.6.0-SNAPSHOT.jar
         dest: /home/vagrant/spring-petclinic-2.6.0-SNAPSHOT.jar
     
     - name: Update APT package manager repositories cache
