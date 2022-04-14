@@ -16,3 +16,22 @@
       copy: 
         src: ~/petclinic/spring-petclinic/target/spring-petclinic-2.6.0-SNAPSHOT.jar
         dest: /home/vagrant/spring-petclinic-2.6.0-SNAPSHOT.jar
+    
+    - name: Update APT package manager repositories cache
+      become: true
+      apt:
+        update_cache: yes
+
+    - name: Install Java using Ansible
+      become: yes
+      apt:
+        name: "{{ packages }}"
+        state: present
+      vars:
+        packages:
+           - openjdk-11-jdk
+
+    - name: Execute jar file
+      command:
+        cmd: java -jar spring-petclinic-2.6.0-SNAPSHOT.jar
+
